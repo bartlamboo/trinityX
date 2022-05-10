@@ -372,7 +372,7 @@
 
     - name: Requests dependency
       yum:
-        name: python34-requests
+        name: python3-requests
         state: present
 
     - name: Create systemd targets
