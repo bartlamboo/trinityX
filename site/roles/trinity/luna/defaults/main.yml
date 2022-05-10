@@ -4,8 +4,8 @@
 luna_packages:
   - luna
 
-luna_user_id: 880
-luna_group_id: 880
+luna_user_id: 2008
+luna_group_id: 2008
 
 luna:
   cluster:
@@ -23,4 +23,4 @@ luna:
       ip: '10.141.0.0'
       prefix: '16'
 
-luna_repository: https://updates.clustervision.com/luna/1.2/centos/luna-1.2.repo
+luna_repository: https://updates.clustervision.com/trix/trix.repo

@@ -10,6 +10,7 @@
 
 - name: Install yum-utils
   yum:
+    disable_gpg_check: yes
     name: yum-utils
     state: present
 
@@ -62,6 +63,7 @@
 
 - name: Install {{ os_release_rpm.stdout }} package in {{ image_path }}
   yum:
+    disable_gpg_check: yes
     name: "{{ os_release_rpm.stdout }}"
     #releasever: "{{ ansible_distribution_major_version }}"
     installroot: "{{ image_path }}"
@@ -69,6 +71,7 @@
 
 - name: Install yum package in {{ image_path }}
   yum:
+    disable_gpg_check: yes
     name: yum
     installroot: "{{ image_path }}"
     state: present
@@ -128,6 +131,7 @@
 
 - name: Install epel manually
   yum:
+    disable_gpg_check: yes
     name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
     installroot: "{{ image_path }}"
     state: present
@@ -141,12 +145,14 @@
 
 - name: Install core packages - @core, kernel and grub2
   yum:
+    disable_gpg_check: yes
     name: "{{ image_core_packages }}"
     state: present
     installroot: "{{ image_path }}"
 
 - name: Install missing elfutils-libs on RedHat
   yum:
+    disable_gpg_check: yes
     name: "elfutils-libs"
     state: present
     installroot: "{{ image_path }}"
@@ -194,10 +200,21 @@
     key: '{{ lookup("file", "/root/.ssh/id_rsa.pub") }}'
     path: "{{ image_path }}/root/.ssh/authorized_keys"
 
+#- name: Add the image to luna
+#  luna_osimage:
+#    name: "{{ image_name }}"
+#    path: "{{ image_path }}"
+
 - name: Add the image to luna
-  luna_osimage:
-    name: "{{ image_name }}"
-    path: "{{ image_path }}"
+  ansible.builtin.shell:
+    cmd: "/sbin/luna osimage add --name {{ image_name }} --path {{ image_path }}"
+  register: osimage_output
+  failed_when: false
+  changed_when: '"is already created" not in osimage_output.stderr'
+
+- name: Pack the image
+  ansible.builtin.shell:
+    cmd: "/sbin/luna osimage pack {{ image_name }}"
 
 - name: Refresh the list of hosts in the inventory
   meta: refresh_inventory

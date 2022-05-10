@@ -6,9 +6,11 @@
 
 - name: Install init packages
   yum:
-    name: '{{ init_packages }}'
+    name: '{{ item }}'
     state: present
   tags: install-only
+  with_items: '{{ init_packages }}'
+  when: init_packages is defined
 
 - block:
 

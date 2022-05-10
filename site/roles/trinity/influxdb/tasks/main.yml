@@ -47,6 +47,7 @@
 
 - name: Install influxdb pip
   pip:
+    executable: /bin/pip2
     name: influxdb
     state: present
 
