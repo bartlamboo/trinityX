@@ -58,9 +58,9 @@
 
     - name: "Create root user"
       mongodb_user:
-        login_user: "root"
-        login_database: "admin"
-        login_password: "{{ mongo_root_pwd }}"
+#        login_user: "root"
+#        login_database: "admin"
+#        login_password: "{{ mongo_root_pwd }}"
         name: "root"
         database: "admin"
         roles: [ "root" ]

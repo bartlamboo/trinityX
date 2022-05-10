@@ -29,6 +29,14 @@
     system: yes
     state: present
 
+- name: Install luna packages
+  yum:
+    name:
+      - python3-pymongo
+      - python2-pymongo
+    state: present
+  when: ansible_distribution == "Rocky"
+
 - name: Create a user for luna in MongoDB
   mongodb_user:
     login_database: "admin"
