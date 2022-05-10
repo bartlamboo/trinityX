@@ -283,7 +283,7 @@
         backup: "yes"
       with_together:
         - ['slurm.conf', 'slurmdbd.conf']
-        - ['0644', '0640']
+        - ['0644', '0600']
       notify: restart slurm
 
     - name: Set UsePAM to 1 in slurm-user.conf
