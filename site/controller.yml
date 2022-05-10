@@ -82,6 +82,23 @@
       resolv_server: '{{ trix_ctrl_ip }}'
       tags: bind
 
+    - role: trinity/openldap
+      openldap_server_dir_path: '{{ trix_local }}/var/lib/ldap'
+      openldap_server_conf_path: '{{ trix_local }}/etc/openldap/slapd.d'
+      tags: openldap
+
+    - role: trinity/obol
+      users_home_path: '{{ trix_home }}'
+      ldap_host: '{{ trix_ctrl_hostname }}.{{ trix_domain }}'
+      tags: obol
+
+    - role: trinity/sssd
+      sss_allowed_groups:
+        - 'admins'
+      sss_ldap_hosts:
+        - '{{ trix_ctrl_hostname }}.{{ trix_domain }}'
+      tags: sssd
+
     - role: trinity/mariadb
       mariadb_db_path: '{{ trix_local }}/var/lib/mysql'
       tags: mariadb

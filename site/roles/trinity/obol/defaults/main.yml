@@ -2,8 +2,8 @@
 # vars file for obol
 
 obol_packages:
-  - python2-retrying
-  - python2-ldap
+  - python2-devel
+  - openldap-devel
 
 users_home_path: '/home'
 obol_conf_path: '/etc'
