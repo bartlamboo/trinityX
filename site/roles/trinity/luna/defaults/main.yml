@@ -11,8 +11,8 @@ luna:
   cluster:
     frontend_address: '10.141.255.252'
     path: '/opt/luna'
-    named_include_file: '/etc/named.luna.zones'
-    named_zone_dir: '/var/named'
+    named_include_file: '/trinity/local/etc/named.luna.zones'
+    named_zone_dir: '/trinity/local/var/lib/named'
   dhcp: 
     conf_path: '/etc/dhcp'
     network: 'cluster'
