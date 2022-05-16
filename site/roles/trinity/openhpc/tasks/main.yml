@@ -54,9 +54,9 @@
 - name: Install lmod dependencies on non-controller nodes
   yum:
     name:
-      - lua-filesystem-ohpc
-      - lua-posix-ohpc
-      - lua-bit-ohpc
+      - lua-filesystem
+      - lua-posix
+    enablerepo: powertools
     state: installed
   when: ansible_connection in 'lchroot' or "controllers" not in group_names
 
