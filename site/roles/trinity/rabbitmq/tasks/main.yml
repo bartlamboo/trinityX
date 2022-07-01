@@ -32,15 +32,15 @@
     mode: '0400'
   notify: restart rabbitmq-server
 
-- name: Enables the rabbitmq_management plugin
-  rabbitmq_plugin:
-    names: rabbitmq_management
-    state: enabled
-
 - name: Start and enable rabbitmq-server
   systemd:
     name: rabbitmq-server
     state: started
+
+- name: Enables the rabbitmq_management plugin
+  rabbitmq_plugin:
+    names: rabbitmq_management
+    state: enabled
 
 - name: make sure rabbitmq app is up
   command: rabbitmqctl start_app

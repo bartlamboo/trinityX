@@ -21,13 +21,13 @@
 
 - name: Install pymongo3 dependency
   pip:
-    name: pymongo
+    name: 'pymongo<4'
     executable: /usr/bin/pip3
     state: latest
 
 - name: Install pymongo2 dependency
   pip:
-    name: pymongo
+    name: 'pymongo<4'
     executable: /usr/bin/pip2
     state: latest
 
