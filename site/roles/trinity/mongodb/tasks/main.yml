@@ -19,6 +19,18 @@
     disable_gpg_check: yes
   tags: install-only
 
+- name: Install pymongo3 dependency
+  pip:
+    name: pymongo
+    executable: /usr/bin/pip3
+    state: latest
+
+- name: Install pymongo2 dependency
+  pip:
+    name: pymongo
+    executable: /usr/bin/pip2
+    state: latest
+
 - name: Create config file
   template:
     src: mongod.conf.j2

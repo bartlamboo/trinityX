@@ -23,7 +23,9 @@
   yum:
     name: '{{ openldap_packages }}'
     state: present
-    enablerepo: plus
+    enablerepo:
+      - plus
+      - powertools
   tags: install-only
 
 - block:
