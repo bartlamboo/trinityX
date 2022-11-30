@@ -51,7 +51,7 @@
 #     name: NetworkManager
 #     state: stopped
 #   when: NM_service.rc == 0 and
-#         'lchroot' not in ansible_connection
+#         'chroot' not in ansible_connection
 
 # - name: Remove NetworkManager
 #   yum:
