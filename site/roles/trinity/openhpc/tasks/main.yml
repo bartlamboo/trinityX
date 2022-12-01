@@ -75,6 +75,7 @@
   yum:
     name: lmod-ohpc
     state: installed
+    enablerepo: powertools
   when: ansible_connection in 'chroot' or "controllers" not in group_names
 
 - name: Install profile for modules
