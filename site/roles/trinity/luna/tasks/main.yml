@@ -29,17 +29,17 @@
     system: yes
     state: present
 
-- name: Install pymongo3 dependency
-  pip:
-    name: 'pymongo<4'
-    executable: /usr/bin/pip3
-    state: latest
+#- name: Install pymongo3 dependency
+#  pip:
+#    name: 'pymongo<4'
+#    executable: /usr/bin/pip3
+#    state: latest
 
-- name: Install pymongo2 dependency
-  pip:
-    name: 'pymongo<4'
-    executable: /usr/bin/pip2
-    state: latest
+#- name: Install pymongo2 dependency
+#  pip:
+#    name: 'pymongo<4'
+#    executable: /usr/bin/pip2
+#    state: latest
 
 - name: Create a user for luna in MongoDB
   mongodb_user:
@@ -225,6 +225,20 @@
   - name: Initialize luna cluster
     ansible.builtin.shell:
       cmd: "/sbin/luna cluster init --frontend_address {{ luna.cluster.frontend_address }} --path {{ luna.cluster.path }} --user luna --nodeprefix node --nodedigits 3"
+    register: initialize_output
+    failed_when: false
+    changed_when: '"is already created" not in initialize_output.stderr'
+
+  - name: Set luna cluster named include file
+    ansible.builtin.shell:
+      cmd: "/sbin/luna cluster change --named_include_file {{ luna.cluster.named_include_file }}"
+    register: initialize_output
+    failed_when: false
+    changed_when: '"is already created" not in initialize_output.stderr'
+
+  - name: Set luna cluster named zone dir
+    ansible.builtin.shell:
+      cmd: "/sbin/luna cluster change --named_zone_dir {{ luna.cluster.named_zone_dir }}"
     register: initialize_output
     failed_when: false
     changed_when: '"is already created" not in initialize_output.stderr'
